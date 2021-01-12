@@ -1,0 +1,228 @@
+<form autocomplete="off" #form="ngForm" (keyup.control.enter)="salvar(form)" (keyup.escape)="cancelarSwal.show()">
+  <div class="ui-g">
+    <div class="ui-g-12 ui-md-4">
+      <label class="jf_blk">Saae</label>
+      <p-autoComplete [suggestions]="clientes" (completeMethod)="pesquisarCliente($event)"
+                      #auto
+                      [(ngModel)]="cliente"
+                      (ngModelChange)="escolherCliente()" name="cliente"
+                      forceSelection="true"
+                      size="38"
+                      (keyup.enter)="cont.focus()"
+                      emptyMessage="Não Encontrado"
+                      field="fantasia">
+
+        <ng-template let-cli pTemplate="item">
+          <div class="ui-g ui-g-nopad">
+            <div class="ui-g-2" style="text-align: right">
+              <label class="jf_blk">Cód</label>
+              {{cli.codCliente}}
+            </div>
+
+            <div class="ui-g-8">
+              <label class="jf_blk">Nome</label>
+              {{cli.fantasia}}
+            </div>
+          </div>
+        </ng-template>
+      </p-autoComplete>
+      <button type="button" icon="fa fa-user" style="position: absolute"
+              pButton title="Acessar Cliente" [disabled]="dialogo"
+              (click)="acessarCliente()"
+              class="bts"></button>
+    </div>
+
+    <div class="ui-g-12 ui-md-2">
+      <label class="jf_blk">Contato</label>
+      <p-dropdown [options]="contatos" [(ngModel)]="contato" optionLabel="nome" [style]="{'width':'85%'}" #cont
+                  name="contato" (onChange)="escolherContato($event)"
+                  [disabled]="!chamado.clienteID"
+                  (keyup.enter)="oco.focus()"></p-dropdown>
+      <button type="button" icon="fa fa-user" style="position: absolute"
+              pButton title="Inserir ou Alterar Contato"
+              (click)="adicionarContato()"
+              [disabled]="!chamado.clienteID"
+              class="bts"></button>
+
+    </div>
+
+    <div class="ui-g-12 ui-md-2">
+      <label class="jf_blk">Versao</label>
+      <p-dropdown [options]="versoes" [(ngModel)]="chamado.versao" #ver [disabled]="!chamado.clienteID"
+                  [style]="{'width':'85%'}" name="versao"></p-dropdown>
+      <button type="button" icon="fa fa-plus" style="position: absolute"
+              pButton title="Adicionar Versao" [disabled]="!chamado.clienteID"
+              (click)="adicionarVersao()"
+              class="bts"></button>
+    </div>
+
+    <div class="ui-g-12 ui-md-2">
+      <label class="jf_blk">Ocorrência</label>
+      <p-dropdown [options]="ocorrencias" [(ngModel)]="chamado.ocorrenciaID" #oco (onChange)="escolherOcorrencia()"
+                  name="ocorrencia"></p-dropdown>
+    </div>
+
+    <div class="ui-g-12 ui-md-2">
+      <label class="jf_blk">Atendimento</label>
+      <p-selectButton [options]="atendimento" [(ngModel)]="chamado.atendimento" name="atendimento"
+                      (onChange)="update.emit()"></p-selectButton>
+    </div>
+
+    <div class="ui-g-12 ui-g-nopad">
+      <div class="ui-g-12 ui-md-3">
+        <label class="jf_blk">Atribuído a</label>
+        <p-dropdown [options]="usuarios" [(ngModel)]="chamado.atribuicaoID" name="usuario"></p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-md-1">
+        <label class="jf_blk">Prioridade</label>
+        <p-dropdown [options]="prioridades" [(ngModel)]="chamado.prioridade" name="prioridade"></p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-md-2">
+        <label class="jf_blk">Data</label>
+        <p-calendar [(ngModel)]="chamado.datAbertura" showTime="true" dateFormat="dd/mm/y" [locale]="pt"
+                    name="data"></p-calendar>
+      </div>
+
+      <div class="ui-g-12 ui-md-2 ">
+        <label class="jf_blk">Sistema</label>
+        <p-dropdown [options]="sistemas" [(ngModel)]="chamado.sistemas" #sistema name="sistemas"></p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-md-2">
+        <label class="jf_blk">Situação</label>
+        <p-selectButton [options]="situacoes" [(ngModel)]="chamado.situacao" name="situacao"></p-selectButton>
+      </div>
+
+      <div class="ui-g-1" style="text-align: center">
+        <app-anexos [chamado]="chamado"></app-anexos>
+      </div>
+
+    </div>
+
+    <div class="ui-g-12">
+      <p-tabView [activeIndex]="index" #tabView>
+        <p-tabPanel header="Atendimento" leftIcon="fa fa-desktop">
+          <div class="ui-g">
+            <div class="ui-g-12">
+              <label class="jf_blk" for="assunto">Assunto</label>
+              <input pInputText name="nome" [(ngModel)]="chamado.titulo" autocomplete="off" #ass="ngModel"
+                     id="assunto"
+                     required="true"
+                     #nome="ngModel" [maxLength]="100">
+              <app-jf-valida-campo error="required" [control]="ass" text="Informe o Assunto"></app-jf-valida-campo>
+            </div>
+            <div class="ui-g-12">
+              <label class="jf_blk">Descrição</label>
+              <p-editor [(ngModel)]="chamado.detalhamento" required="true" #det="ngModel" [style]="{'height':'100px'}"
+                        name="detalhe">
+                <p-header>
+        <span class="ql-formats">
+            <button class="ql-bold" aria-label="Bold"></button>
+            <button class="ql-italic" aria-label="Italic"></button>
+            <button class="ql-list" value="ordered"></button>
+            <button class="ql-list" value="bullet"></button>
+        </span>
+                </p-header>
+              </p-editor>
+              <app-jf-valida-campo error="required" [control]="det" text="Informe a Descrição"></app-jf-valida-campo>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Solução" leftIcon="fa fa-thumbs-o-up" *ngIf="chamado.situacao === 0">
+          <div class="ui-g">
+            <div class="ui-g-12">
+              <p-editor [(ngModel)]="chamado.solucao" [style]="{'height':'100px'}"
+                        name="solucao">
+                <p-header>
+              <span class="ql-formats">
+                  <button class="ql-bold" aria-label="Bold"></button>
+                  <button class="ql-italic" aria-label="Italic"></button>
+                  <button class="ql-list" value="ordered"></button>
+                  <button class="ql-list" value="bullet"></button>
+              </span>
+                </p-header>
+              </p-editor>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel [header]="'Comentários (' + chamado?.comentarios.length+')'" leftIcon="fa fa-commenting-o">
+          <div class="ui-g">
+            <div class="ui-g-4">
+              <i class="fa fa-check fa-2x" title="Salvar Comentário"
+                 style="position: absolute; margin-left: 275px;
+                       margin-top: 6px; cursor: pointer" (click)="incluirComentario()"></i>
+              <p-editor [(ngModel)]="comentario" [style]="{'height':'200px'}"
+                        name="comentario">
+                <p-header>
+              <span class="ql-formats">
+                  <button class="ql-bold" aria-label="Bold"></button>
+                  <button class="ql-italic" aria-label="Italic"></button>
+                  <button class="ql-list" value="ordered"></button>
+                  <button class="ql-list" value="bullet"></button>
+              </span>
+                </p-header>
+              </p-editor>
+            </div>
+            <div class="ui-g-8">
+              <p-scrollPanel [style]="{width: '100%', height: '243px'}">
+                <p-dataView [value]="chamado?.comentarios" emptyMessage="Nenhum Há Comentários" layout="list">
+                  <ng-template let-c pTemplate="listItem">
+                    <div class="ui-g-12">
+                      <app-comentario-usuario [comentario]="c"></app-comentario-usuario>
+                    </div>
+                  </ng-template>
+                </p-dataView>
+              </p-scrollPanel>
+            </div>
+          </div>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+
+    <div class="ui-g-12 ui-g-nopad ui-dialog-footer">
+      <div class="ui-g-6 ui-g-nopad" style="text-align: left">
+        <button type="button" pButton icon="fa fa-times-circle" label="(Esc) Cancelar" [swal]="cancelarSwal"
+        ></button>
+      </div>
+
+      <button type="button" title="Excluir" *ngIf="podeExcluir" pButton class="red-btn" icon="fa fa-trash"
+              [swal]="deleteSwal" style="margin-right: 5px;"
+      ></button>
+
+      <button type="button" pButton icon="fa fa-save" class="green-btn" label="(Ctrl + Enter) Salvar "
+              [disabled]="salvando"
+              (click)="salvar(form)"></button>
+    </div>
+
+  </div>
+
+  <swal
+    #cancelarSwal
+    title="Cancelar"
+    text="Deseja Cancelar {{chamado.cliente}} ? "
+    type="warning"
+    [showCancelButton]="true"
+    cancelButtonText="Não"
+    confirmButtonText="Sim"
+    focusConfirm="true"
+    (confirm)="cancelar()">
+  </swal>
+
+  <swal
+    #deleteSwal
+    title="Excluir"
+    text="Deseja Excluir o Atendimento {{chamado.cliente}} ? "
+    type="warning"
+    [showCancelButton]="true"
+    cancelButtonText="Não"
+    confirmButtonText="Sim"
+    focusConfirm="true"
+    (confirm)="excluir()">
+  </swal>
+
+  <div *ngIf="!dialogo"><br/><br/><br/><br/><br/></div>
+
+
+</form>

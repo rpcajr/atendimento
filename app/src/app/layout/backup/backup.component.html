@@ -1,0 +1,49 @@
+<form autocomplete="off">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-panel header="Backups">
+        <div class="ui-g">
+          <div class="ui-g-12" *ngIf="list">
+            <p-table #dt [value]="list" [responsive]="true" [globalFilterFields]="['codCliente', 'nome', 'cidade']"
+                     [scrollable]="true" scrollHeight="350px"
+                     (onRowSelect)="selecionar($event)"
+                     selectionMode="single" dataKey="id">
+              <ng-template pTemplate="caption">
+                <div class="ui-g">
+                  <div class="ui-g-12" style="text-align: right">
+                    {{filter.focus()}}
+                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                    <input type="text" #filter pInputText size="50" placeholder=""
+                           (input)="dt.filterGlobal($event.target.value, 'contains')"
+                           style="width:auto">
+                  </div>
+                </div>
+              </ng-template>
+
+              <ng-template pTemplate="header">
+                <tr>
+                  <th class="col_100">Registro</th>
+                  <th>Nome</th>
+                  <th class="col_200">Cidade</th>
+                  <th class="col_100">Dias</th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData" [ngClass]="{'alerta':rowData.dias > 8}">
+                  <td class="col_100 center">{{rowData.codCliente}}</td>
+                  <td>{{rowData.nome}}</td>
+                  <td class="col_200">{{rowData.cidade}}</td>
+                  <td class="col_100 center">
+                    {{rowData.dias > 5000 ? 'Nunca' : rowData.dias }}</td>
+                </tr>
+              </ng-template>
+
+            </p-table>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+</form>

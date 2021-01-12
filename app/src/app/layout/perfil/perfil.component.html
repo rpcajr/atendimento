@@ -1,0 +1,31 @@
+<form autocomplete="off" #f="ngForm">
+  <div class="ui-g dashboard">
+    <div class="ui-g-12 ui-md-4 ui-md-offset-4">
+      <div class="user-card ">
+        <div class="user-card-header"></div>
+        <div class="user-card-content">
+          <img [src]="imagem" (error)="setDefaultPic()"  style="width: 155px; height: 155px; border-radius: 50%;">
+          <span class="user-card-name">{{user.nome}}</span>
+          <span class="user-card-role">{{user.setor}}</span>
+          <label for='selecao-arquivo' class="label_upload">Alterar Foto</label>
+          <input id='selecao-arquivo' type='file' (change)="onFileChanged($event)">
+        </div>
+        <div class="user-card-footer">
+          <div class="ui-g">
+            <div class="ui-g-6">
+              <button type="button" icon="fa fa-floppy-o" label="Salvar"
+                      pButton title="Salvar"
+                      class="bts" (click)="salvar()"></button>
+            </div>
+            <div class="ui-g-6">
+              <button type="button" icon="fa fa-ban"
+                      pButton title="Cancelar" label="Cancelar"
+                      class="bts" (click)="cancelar()"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</form>

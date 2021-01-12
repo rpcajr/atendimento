@@ -1,0 +1,48 @@
+<form autocomplete="off" #form="ngForm" >
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <div class="jf__container">
+        <p-panel header="Versão">
+          <div class="ui-g">
+            <div class="ui-g-12">
+              <app-jf-botoes #bts
+                             (novo)="editar()"
+                             (salvar)="salvar(form)"
+                             ocultarPesquisar="true"
+                             (pesquisar)="pesquisar()"
+                             (editar)="editar()"
+                             (cancelar)="limpar(form)"
+              ></app-jf-botoes>
+            </div>
+            <div class="ui-g-12">
+              <label class="jf_blk">Nome</label>
+              <input pInputText appUppercase name="nome" [(ngModel)]="versao.versao"
+                     #nom
+                     #nome="ngModel" [maxLength]="30" required
+                     [disabled]="!edicao">
+              <app-jf-valida-campo error="required" [control]="nome" text="Informe o Nome">
+              </app-jf-valida-campo>
+            </div>
+          </div>
+
+          <app-jf-rodape [total]="total"></app-jf-rodape>
+
+          <swal
+            #deleteSwal
+            title="Delete"
+            text="This cannot be undone"
+            type="warning"
+            [showCancelButton]="true"
+            cancelButtonText="Cancelar"
+            confirmButtonText="Confirmar"
+            [focusCancel]="true"
+            (confirm)="editar()">
+          </swal>
+
+          <button [swal]="deleteSwal" *ngIf="false" ></button>
+
+        </p-panel>
+      </div>
+    </div>
+  </div>
+</form>

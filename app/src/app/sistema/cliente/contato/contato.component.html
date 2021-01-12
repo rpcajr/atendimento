@@ -1,0 +1,38 @@
+<form autocomplete="off" #form="ngForm">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <label class="jf_blk">Nome</label>
+      <input pInputText appUppercase name="nome" [(ngModel)]="contato.nome"
+             #nom autocomplete="off"
+             #nome="ngModel" [maxLength]="100" required>
+      <app-jf-valida-campo error="required" [control]="nome" text="Informe o Nome">
+      </app-jf-valida-campo>
+    </div>
+
+    <div class="ui-g-12">
+      <label class="jf_blk">Cargo</label>
+      <input pInputText appUppercase name="cargo" [(ngModel)]="contato.cargo" autocomplete="off"
+             [maxLength]="50">
+    </div>
+
+    <div class="ui-md-6 ui-g-12">
+      <label class="jf_blk">Fone</label>
+      <input pInputText ngxPhoneMaskBr name="fone" [(ngModel)]="contato.fone">
+    </div>
+
+    <div class="ui-md-6 ui-g-12">
+      <label class="jf_blk">Fone 2</label>
+      <input pInputText ngxPhoneMaskBr name="fone2" [(ngModel)]="contato.fone2">
+    </div>
+
+    <div class="ui-g-12">
+      <label class="jf_blk">Email</label>
+      <input pInputText name="email" [(ngModel)]="contato.email" autocomplete="off">
+    </div>
+
+  </div>
+  <div class="ui-dialog-footer">
+    <button type="button" pButton icon="fa fa-times-circle" label="Cancelar" (click)="cancelar()"></button>
+    <button type="button" pButton icon="fa fa-save" label="Salvar" class="green-btn" (click)="salvar()"></button>
+  </div>
+</form>

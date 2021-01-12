@@ -1,0 +1,55 @@
+<body class="jf__login-body">
+
+<form autocomplete="off" #f="ngForm" (submit)="login(f); ">
+  <div class="jf__login-panel">
+    <div class="ui-g" style="z-index: 3">
+      <div class="ui-g-12 jf__logo-container">
+        <img src="assets/images/logo.png"/>
+        <h1>Nerd tech</h1>
+        <h2>V 1.0.6</h2>
+      </div>
+      <div class="ui-g-12  ui-fluid">
+        <div class="ui-inputgroup ">
+          <span class="ui-inputgroup-addon" [ngClass]="{'jf__addon-error': log.hasError('required') && log.dirty}"><i
+            class="fa fa-user"></i></span>
+          <input pInputText name="login" [(ngModel)]="usuario" #log="ngModel" #username
+                 (keyup.enter)="password.focus()"
+                 required placeholder="Login" [disabled]="conectando">
+        </div>
+        <app-jf-valida-campo error="required" [control]="log" text="Informe o Login">
+        </app-jf-valida-campo>
+
+      </div>
+      <div class="ui-g-12  ui-fluid">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"
+                [ngClass]="{'jf__addon-error': senha.hasError('required') && senha.dirty}"><i
+            class="fa fa-key"></i></span>
+          <input pInputText type="password" name="senha" [(ngModel)]="sen" #senha="ngModel" required #password
+                 (keyup.enter)="login(f)" placeholder="Senha" [disabled]="conectando">
+        </div>
+        <app-jf-valida-campo error="required" [control]="senha" text="Informe a senha">
+        </app-jf-valida-campo>
+      </div>
+      <div class="ui-g-12  ui-fluid">
+        <br/>
+        <button type="button" (click)="login(f)" [disabled]="conectando"
+                class="ui-button green-btn ui-widget ui-state-default ui-corner-all ui-button-text-icon-left">
+          <span class="ui-button-icon-left ui-c fa fa-fw ui-icon-person"></span>
+          <span class="ui-button-text ui-c">Entrar</span>
+        </button>
+      </div>
+    </div>
+    <div style="bottom: 0; width: 100%;    position: absolute;  margin-left: -100px;">
+      <p-progressBar [mode]=" conectando ? 'indeterminate' :  'determinate'" value="100" [showValue]="false"
+                     [style]="{'height': '20px'}"></p-progressBar>
+    </div>
+
+  </div>
+
+</form>
+</body>
+
+
+
+

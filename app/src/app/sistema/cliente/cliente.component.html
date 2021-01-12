@@ -1,0 +1,195 @@
+<form autocomplete="off" #form="ngForm">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-panel header="Cliente">
+        <div class="ui-g">
+          <div class="ui-g-12">
+            <div class="ui-g-12">
+              <app-jf-botoes #bts
+                             (novo)="editar()"
+                             (salvar)="salvar(form)"
+                             (pesquisar)="pesquisar()"
+                             (editar)="editar()"
+                             (cancelar)="limpar(form)"
+              ></app-jf-botoes>
+            </div>
+
+            <div class="ui-g-12">
+              <p-tabView [activeIndex]="index">
+                <p-tabPanel header="Cliente" leftIcon="fa fa-id-card-o">
+                  <div class="ui-g">
+
+                    <div class="ui-md-2 ui-g-12">
+                      <label class="jf_blk">Registro</label>
+                      <input pInputText appUppercase name="codCliente" [(ngModel)]="cliente.codCliente"
+                             #reg [disabled]="cliente.id != null"
+                             (keyup.enter)="pesquisarCliente(form)"
+                             #r="ngModel" [maxLength]="50" required>
+                      <app-jf-valida-campo error="required" [control]="r" text="Obrigatório" *ngIf="edicao">
+                      </app-jf-valida-campo>
+                    </div>
+
+                    <div class="ui-md-10 ui-g-12">
+                      <label class="jf_blk">Nome</label>
+                      <input pInputText appUppercase name="nome" [(ngModel)]="cliente.nome"
+                             #nome
+                             [disabled]="!edicao"
+                             #n="ngModel" [maxLength]="50" required>
+                      <app-jf-valida-campo error="required" [control]="n" text="Informe o Nome do Cliente">
+                      </app-jf-valida-campo>
+                    </div>
+
+                    <div class="ui-md-6 ui-g-12">
+                      <label class="jf_blk">Fantasia</label>
+                      <input pInputText appUppercase name="fantasia" [(ngModel)]="cliente.fantasia" required
+                             [disabled]="!edicao"
+                             [maxLength]="50">
+                    </div>
+
+                    <div class="ui-md-2 ui-g-2">
+                      <label class="jf_blk">Versao</label>
+                      <p-dropdown [options]="versoes" [(ngModel)]="cliente.versao" name="versao" required
+                                  [disabled]="!edicao"></p-dropdown>
+                    </div>
+
+                    <div class="ui-md-2 ui-g-5">
+                      <label class="jf_blk">Fone</label>
+                      <input pInputText ngxPhoneMaskBr name="fone" [(ngModel)]="cliente.fone" #fone1
+                             [disabled]="!edicao">
+                    </div>
+
+                    <div class="ui-md-2 ui-g-5">
+                      <label class="jf_blk">Fone2</label>
+                      <input pInputText ngxPhoneMaskBr name="fone2" [(ngModel)]="cliente.fone2" #fone2
+                             [disabled]="!edicao">
+                    </div>
+
+                    <div class="ui-md-8 ui-g-12">
+                      <label class="jf_blk">Endereço</label>
+                      <input pInputText appUppercase name="endereco" [(ngModel)]="cliente.endereco" required
+                             [disabled]="!edicao"
+                             [maxLength]="150">
+                    </div>
+
+                    <div class="ui-md-4 ui-g-12">
+                      <label class="jf_blk">Bairro</label>
+                      <input pInputText appUppercase name="bairro" required [(ngModel)]="cliente.bairro"
+                             [disabled]="!edicao">
+                    </div>
+
+                    <div class="ui-md-4 ui-g-8">
+                      <label class="jf_blk">Cidade</label>
+                      <input pInputText appUppercase name="cidade" required [(ngModel)]="cliente.cidade"
+                             [disabled]="!edicao">
+                    </div>
+
+                    <div class="ui-md-2 ui-g-4">
+                      <label class="jf_blk">CEP</label>
+                      <input pInputText appUppercase name="cep" [(ngModel)]="cliente.cep" [disabled]="!edicao">
+                    </div>
+
+                    <div class="ui-md-1 ui-g-2">
+                      <label class="jf_blk">UF</label>
+                      <p-dropdown [options]="ufs" [(ngModel)]="cliente.uf" name="uf" required
+                                  [disabled]="!edicao"></p-dropdown>
+                    </div>
+
+                    <div class="ui-md-5 ui-g-12">
+                      <label class="jf_blk">Email</label>
+                      <input pInputText appUppercase name="email" [(ngModel)]="cliente.email" [disabled]="!edicao">
+                    </div>
+                  </div>
+
+                </p-tabPanel>
+                <p-tabPanel header="Contatos" leftIcon="fa fa-phone">
+                  <p-table #dt [value]="cliente.contatos" [responsive]="true"
+                           [scrollable]="true" dataKey="id">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th>Nome</th>
+                        <th class="col_140 center">Fone</th>
+                        <th class="col_140 right">Fone 2</th>
+                        <th class="col_50 right"></th>
+                      </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                      <tr [pSelectableRow]="rowData">
+                        <td>{{rowData.nome}}</td>
+                        <td class="col_140 center">{{rowData.fone}}</td>
+                        <td class="col_140 center">{{rowData.fone2}}</td>
+                        <td class="col_50">
+                          <button type="button" pButton icon="fa fa-edit" (click)="editarContato(rowData)"
+                                  [disabled]="!edicao"></button>
+                        </td>
+                      </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="summary" let-rowData>
+                      <div style="text-align:left">
+                        <button type="button" pButton icon="fa fa-plus" label="Adicionar" (click)="adicionarContato()"
+                                [disabled]="!edicao"></button>
+                      </div>
+                    </ng-template>
+
+                  </p-table>
+                </p-tabPanel >
+                <p-tabPanel header="Atendimentos" leftIcon="fa fa-ticket" >
+                  <div class="ui-g">
+                    <div class="ui-g-12">
+                      <app-chamados #chamado [hideFilter]="true" [filter]="filter" [ignoreInit]="true"></app-chamados>
+                    </div>
+                  </div>
+                </p-tabPanel>
+
+                <p-tabPanel header="Sistemas" leftIcon="fa fa-desktop" >
+                  <div class="ui-g">
+                    <div class="ui-g-12">
+                      <p-table #dt [value]="sistemas" [responsive]="true"
+                               scrollHeight="180px"
+                               [scrollable]="true" >
+
+                        <ng-template pTemplate="header">
+                          <tr>
+                            <th>Sistema</th>
+                            <th class="col_100 center">Limite</th>
+                            <th class="col_100 center">Contrato</th>
+                            <th class="col_100 center">Versão</th>
+                            <th class="col_100 center">Data Versão</th>
+                            <th class="col_50 center">Grupo</th>
+                          </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                          <tr [pSelectableRow]="rowData">
+                            <td>{{rowData.nome}}</td>
+                            <td class="col_100 center">{{rowData.limite}}</td>
+                            <td class="col_100 center">{{rowData.contrato}}</td>
+                            <td class="col_100 center">{{rowData.versao}}</td>
+                            <td class="col_100 center">{{rowData.datVersao}}</td>
+                            <td class="col_50 center">{{rowData.grupo}}</td>
+                          </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="summary">
+                          Total {{sistemas?.length}}
+                        </ng-template>
+
+                      </p-table>
+                    </div>
+                  </div>
+                </p-tabPanel>
+
+              </p-tabView>
+            </div>
+
+            <div class="ui-g-12">
+              <app-jf-rodape [total]="total"></app-jf-rodape>
+            </div>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+
+</form>

@@ -1,0 +1,14 @@
+<div class="ui-g-12 ui-g-nopad border "  [ngClass]="{'resolvido': chamado.situacao == 0 , 'andamento': chamado.situacao == 1, 'pendente': chamado.situacao == 2}" (click)="verChamado()">
+  <div class="ui-g-2 ">
+    {{chamado.cliente}}
+  </div>
+  <div class="ui-g-6">
+    {{chamado.titulo}}
+  </div>
+  <div class="ui-g-2">
+    {{chamado.nomeUsuario}}
+  </div>
+  <div class="ui-g-2">
+    {{chamado.dataAbertura |date:'dd/MM/yyyy HH:mm'}}
+  </div>
+</div>

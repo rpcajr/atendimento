@@ -1,0 +1,77 @@
+<div class="layout-sidebar " (click)="app.onSidebarClick($event)">
+  <div class="layout-tabmenu">
+    <ul class="layout-tabmenu-nav">
+      <li [ngClass]="{'active-item':app.activeTabIndex === 0}">
+        <span class="jf-badge" *ngIf="totalUsuarios > 0">{{totalUsuarios}}</span>
+        <a href="#" [routerLink]="['sistema/geral']" (click)="app.onTabClick($event, 0);"
+           class="tabmenuitem-link"><i class="fa fa-ticket"></i></a>
+        <div class="layout-tabmenu-tooltip">
+          <div class="layout-tabmenu-tooltip-arrow"></div>
+          <div class="layout-tabmenu-tooltip-text">Chamado</div>
+        </div>
+      </li>
+
+      <li [ngClass]="{'active-item':app.activeTabIndex === 1}">
+        <a href="#" class="tabmenuitem-link" (click)="app.onTabClick($event, 1)"><i class="fa fa-desktop"></i></a>
+        <div class="layout-tabmenu-tooltip">
+          <div class="layout-tabmenu-tooltip-arrow"></div>
+          <div class="layout-tabmenu-tooltip-text">Sistema</div>
+        </div>
+      </li>
+
+      <li [ngClass]="{'active-item':app.activeTabIndex === 3}">
+        <a href="#" class="ripplelink tabmenuitem-link" (click)="app.onTabClick($event, 3)"><i class="fa fa-code-fork"></i></a>
+        <div class="layout-tabmenu-tooltip">
+          <div class="layout-tabmenu-tooltip-arrow"></div>
+          <div class="layout-tabmenu-tooltip-text">Versões</div>
+        </div>
+      </li>
+
+      <li [ngClass]="{'active-item':app.activeTabIndex === 4}">
+        <span class="jf-badge_alerta" *ngIf="totalClienteSemBackup">{{totalClienteSemBackup}}</span>
+        <a href="#" class="ripplelink tabmenuitem-link" [routerLink]="['backup']" (click)="app.onTabClick($event, 4)"><i class="fa fa-database"></i></a>
+        <div class="layout-tabmenu-tooltip">
+          <div class="layout-tabmenu-tooltip-arrow"></div>
+          <div class="layout-tabmenu-tooltip-text">Backup</div>
+        </div>
+      </li>
+
+    </ul>
+    <div class="layout-tabmenu-contents">
+      <div class="layout-tabmenu-content" [ngClass]="{'layout-tabmenu-content-active': app.activeTabIndex === 1}">
+        <div class="layout-submenu-title clearfix">
+          <span>Sistema</span>
+          <a href="#" class="menu-button" (click)="app.closeSidebar($event)">
+            <i class="fa fa-bars"></i>
+          </a>
+        </div>
+        <app-layout-sidebarTabContent>
+          <app-layout-menu></app-layout-menu>
+        </app-layout-sidebarTabContent>
+      </div>
+      <div class="layout-tabmenu-content" [ngClass]="{'layout-tabmenu-content-active': app.activeTabIndex === 2 || app.activeTabIndex == 0}">
+        <div class="layout-submenu-title clearfix">
+          <span>{{statusAtendimento}}</span>
+          <a href="#" class="menu-button" (click)="app.closeSidebar($event)">
+            <i class="fa fa-bars"></i>
+          </a>
+        </div>
+        <app-layout-sidebarTabContent>
+          <app-atendimento></app-atendimento>
+        </app-layout-sidebarTabContent>
+      </div>
+      <div class="layout-tabmenu-content" [ngClass]="{'layout-tabmenu-content-active': app.activeTabIndex === 3}">
+        <div class="layout-submenu-title clearfix">
+          <span>Versões</span>
+          <a href="#" class="menu-button" (click)="app.closeSidebar($event)">
+            <i class="fa fa-bars"></i>
+          </a>
+        </div>
+        <app-layout-sidebarTabContent>
+         <app-listaversao></app-listaversao>
+        </app-layout-sidebarTabContent>
+      </div>
+
+    </div>
+  </div>
+</div>

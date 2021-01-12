@@ -1,0 +1,10 @@
+.fab{
+  position: fixed;
+  right: 15px;
+  bottom: 21px;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px !important;
+  box-shadow: 3px 2px 4px rgb(65, 65, 65);
+  z-index: 99;
+}

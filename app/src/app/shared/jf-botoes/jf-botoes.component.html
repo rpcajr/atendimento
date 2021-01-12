@@ -1,0 +1,28 @@
+<div class="jf__pns">
+
+  <button type="button" icon="fa fa-plus" [disabled]="btInserir" (click)="acao_novo()"
+          pButton title="Inserir"
+          class="bts"></button>
+
+  <button type="button" icon="fa fa-pencil"
+          pButton title="Editar"
+          class="bts " [disabled]="btEditar" (click)="acao_editar()"></button>
+
+  <button type="button" icon="fa fa-floppy-o"
+          pButton  title="Salvar"
+           [disabled]="btSalvar"
+          class="bts" (click)="acao_salvar()" ></button>
+
+  <button type="button" icon="fa fa-search" [disabled]="btPesquisar" *ngIf="!ocultarPesquisar"
+          pButton title="Pesquisar" (click)="acao_pesquisar()"
+          class="bts "></button>
+
+  <button type="button" icon="fa fa-ban"
+          pButton title="Cancelar"
+          (click)="acao_cancelar()"
+          class="bts " [disabled]="btCancelar" ></button>
+
+  <button type="button" icon="fa fa-sign-out" *ngIf="false"
+          pButton title="Sair" (click)="acao_sair()"
+          class="bts right-bts" [disabled]="btSair"></button>
+</div>

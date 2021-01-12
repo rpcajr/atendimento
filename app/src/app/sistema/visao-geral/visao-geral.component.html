@@ -1,0 +1,22 @@
+<div class="ui-g dashboard " (keyup.enter)="handleKeyboardEvent($event)" style="margin-bottom: 20px">
+  <div class="ui-g-12 ">
+    <button type="button" (click)="novo()" pButton icon="fa fa-plus" class="fab " title="(Ctrl + Barra de Espaço)  Nova Tarefa">
+    </button>
+    <p-tabView #tabView (onClose)="handleClose($event)" [activeIndex]="index">
+      <p-tabPanel header="Visao Geral">
+        <div class="ui-g">
+          <div class="ui-g-12">
+             <app-chamados #chamado></app-chamados>
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel [header]="item.cliente" *ngFor="let item of items; let i = index" [selected]="i+1 == 0" >
+        <app-ticket [chamado]="item" (save)="fecahrAba(i); chamado.loadChamado()" (update)="callWebSocket()" ></app-ticket>
+      </p-tabPanel>
+    </p-tabView>
+
+  </div>
+</div>
+
+
+

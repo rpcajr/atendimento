@@ -1,0 +1,39 @@
+<form autocomplete="off" #form="ngForm" >
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <div class="jf__card_35">
+        <p-panel header="Setor">
+          <div class="ui-g">
+            <div class="ui-g-12">
+              <app-jf-botoes #bts
+                             (novo)="editar()"
+                             (salvar)="salvar()"
+                             (pesquisar)="pesquisar()"
+                             (editar)="editar()"
+                             (cancelar)="limpar()"
+              ></app-jf-botoes>
+            </div>
+            <div class="ui-g-12">
+              <label class="jf_blk">Nome</label>
+              <input pInputText appUppercase name="nome" [(ngModel)]="setor.nome"
+                     #nom
+                     #nome="ngModel" [maxLength]="50" required
+                     [disabled]="!edicao">
+              <app-jf-valida-campo error="required" [control]="nome" text="Informe o Nome">
+              </app-jf-valida-campo>
+            </div>
+
+            <div class="ui-g-12">
+              <label class="jf_blk">Setor Pai</label>
+              <p-dropdown [options]="setores" [(ngModel)]="setorPai" optionLabel="nome" name="pai" [disabled]="!edicao"
+                          (ngModelChange)="escolherPai($event)"></p-dropdown>
+            </div>
+          </div>
+
+          <app-jf-rodape [total]="setores.length"></app-jf-rodape>
+
+        </p-panel>
+      </div>
+    </div>
+  </div>
+</form>

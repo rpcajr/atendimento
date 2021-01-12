@@ -1,0 +1,8 @@
+<div class="team-tab">
+  <ul>
+    <app-atendimento-view *ngFor="let item of atendimentos; let i = index" [atendimento]="item"></app-atendimento-view>
+    <li *ngIf="desconectado" class="clearfix">
+      <button type="button" pButton icon="fa fa-plug" label="Conectar" (click)="conectar()"></button>
+    </li>
+  </ul>
+</div>

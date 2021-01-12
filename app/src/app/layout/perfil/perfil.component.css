@@ -1,0 +1,9 @@
+/* Aparência que terá o seletor de arquivo */
+.label_upload {
+  border-radius: 5px;
+  margin-left: 14px;
+  cursor: pointer;
+  font-style: normal;
+  text-align: center;
+  width: 100%;
+}

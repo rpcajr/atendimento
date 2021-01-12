@@ -1,0 +1,81 @@
+<form autocomplete="off" #form="ngForm">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <div class="jf__card_55">
+        <p-panel header="Operadores">
+          <div class="ui-g">
+            <div class="ui-g-12">
+              <app-jf-botoes #bts
+                             (novo)="inserir()"
+                             (cancelar)="cancelar(form)"
+                             (editar)="editar()"
+                             (pesquisar)="pesquisar()"
+                             (salvar)="salvar(form)"
+              ></app-jf-botoes>
+            </div>
+            <div class="ui-md-7 ui-g-12">
+              <label class="jf_blk">Nome</label>
+              <input pInputText appUppercase name="nome"
+                     #nome
+                     #vNome="ngModel"
+                     [maxLength]="50" required
+                     [(ngModel)]="user.nome"
+                     [disabled]="!edicao"
+                     autocomplete="off"
+              >
+              <app-jf-valida-campo error="required" [control]="vNome" text="Informe o Nome">
+              </app-jf-valida-campo>
+            </div>
+
+            <div class="ui-md-4 ui-g-10">
+              <label class="jf_blk">Setor</label>
+              <p-dropdown [options]="setores" [(ngModel)]="setor" optionLabel="nome" name="pai" [disabled]="!edicao"
+                          (ngModelChange)="escolherSetor($event)"></p-dropdown>
+            </div>
+
+            <div class="ui-md-1 ui-g-2" style="text-align: center">
+              <label class="jf_blk">Inativo</label>
+              <p-checkbox [(ngModel)]="user.inativo" binary="true" name="inativo" [disabled]="!edicao"></p-checkbox>
+            </div>
+
+            <div class="ui-md-6 ui-g-12" *ngIf="novo">
+              <label class="jf_blk">Login</label>
+              <input pInputText appUppercase maxlength="10"
+                     autocomplete="off"
+                     required="true"
+                     name="login"
+                     [disabled]="!edicao"
+                     [(ngModel)]="user.login"
+              >
+
+            </div>
+
+            <div class="ui-md-6 ui-g-12" *ngIf="novo">
+              <label class="jf_blk">Senha</label>
+              <input pInputText appUppercase name="senha" type="password" maxlength="10" minlength="3"
+                     [disabled]="!edicao"
+                     [(ngModel)]="user.senha"
+                     autocomplete="off"
+
+              >
+            </div>
+
+
+            <div class="ui-g-12">
+              <app-jf-permissoes #per [edicao]="edicao"
+                                 [permissoes]="user.permissoes"
+                                 (alteracao)="onNotify($event)"
+
+              ></app-jf-permissoes>
+            </div>
+
+
+          </div>
+
+          <app-jf-rodape [total]="total"></app-jf-rodape>
+
+        </p-panel>
+      </div>
+    </div>
+  </div>
+</form>

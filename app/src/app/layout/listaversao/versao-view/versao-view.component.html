@@ -1,0 +1,9 @@
+<li class="clearfix" (click)="verClientes()" >
+  <span class="project-title">{{versao.versao}}</span>
+  <br/>
+  <div class="project-progressbar">
+    <div class="project-progressbar-value" [ngStyle]="getPercentual()"></div>
+  </div>
+  <br/>
+  <span >Total {{versao.total}}</span>
+</li>

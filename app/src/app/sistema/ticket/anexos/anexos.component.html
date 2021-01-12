@@ -1,0 +1,51 @@
+<label class="jf_blk" [ngClass]="{'verde': chamado.anexos.length>0}">Anexos</label>
+
+
+<label (click)="showDialog()" style="cursor: pointer" [ngClass]="{'verde': chamado.anexos.length>0}">
+  <i class="fa fa-paperclip fa-2x " aria-hidden="true"></i>
+</label>
+
+
+<p-dialog header="Anexos" [(visible)]="display" [modal]="true" appendTo="body"[style]="{width: '400px'}">
+
+  <p-table [value]="chamado.anexos">
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="left">Descrição</th>
+        <th class="col_50"></th>
+        <th class="col_50"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData>
+      <tr>
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input pInputText type="text" [(ngModel)]="rowData.descricao">
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{rowData.descricao}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td class="col_50" style="text-align: center">
+          <a [href]="rowData.url" target="_blank">
+            <i class="fa fa-external-link"></i>
+          </a>
+        </td>
+        <td class="col_50" style="text-align: center">
+          <i class="fa fa-trash-o" (click)="remove(rowData)"></i>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      Total {{chamado.anexos.length}}
+    </ng-template>
+  </p-table>
+
+  <br/><br/>
+  <label for="selecao-arquivo" class="label_upload" style="cursor: pointer; color: darkblue">
+    Adicionar Arquivo
+  </label>
+  <input id="selecao-arquivo" type="file" (change)="uploadAuto($event)" multiple/>
+</p-dialog>

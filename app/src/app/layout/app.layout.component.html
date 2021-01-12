@@ -1,0 +1,17 @@
+<div class="layout-wrapper" [ngClass]="{'layout-wrapper-menu-active':sidebarActive,
+                                        'layout-overlay-menu':overlay}">
+
+  <app-layout-topbar></app-layout-topbar>
+
+  <app-layout-sidebar></app-layout-sidebar>
+
+  <div class="layout-main ">
+    <div class="layout-main-content ">
+      <div [@slideInOut]="triggerAnimation(outlet)" id="mainContainer">
+        <router-outlet #outlet="outlet"></router-outlet>
+      </div>
+      <app-layout-footer></app-layout-footer>
+    </div>
+  </div>
+
+</div>

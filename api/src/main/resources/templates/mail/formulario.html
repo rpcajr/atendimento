@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body style="font-family: Arial; font-size: 14px;">
+
+<h3 th:text="${formulario.titulo}">Olá!</h3>
+
+<p>
+    <label style="font-weight: bold">Nome:</label>
+    <label th:text="${formulario.nome}"></label>
+</p>
+
+<p>
+    <label style="font-weight: bold">Email:</label>
+    <label th:text="${formulario.email}"></label>
+</p>
+
+<p>
+    <label style="font-weight: bold">Fone:</label>
+    <label th:text="${formulario.fone}"></label>
+</p>
+
+<p>
+    <label style="font-weight: bold">Empresa/Orgão:</label>
+    <label th:text="${formulario.empresa}"></label>
+</p>
+
+<p>
+    <label style="font-weight: bold">Cidade:</label>
+    <label th:text="${formulario.cidade}"></label>
+</p>
+
+
+<div th:each="q,iter: ${formulario.questions}" style="border-top: 2px dotted #b5b5b5; background: #b5b5b51f; padding-left: 10px;">
+    <p style="font-weight: bold" th:text=" ${ (iter.index + 1) +'º) ' + q.titulo} "></p>
+    <p th:unless="${q.tipo == 2}" th:text="${'R) - '+q.valor}" style="margin-left: 10px;"></p>
+
+    <div th:if="${q.tipo == 2}" th:each="s: ${q.opcoes}" style="margin-left: 10px">
+        <label >(</label>
+        <label th:unless="${s == q.valor}">&nbsp;&nbsp;</label>
+        <label th:if="${s == q.valor}">X</label>
+        <label >)</label>
+        <label th:text="${s}"></label>
+    </div>
+
+
+</div>
+
+<p style="border-top: 2px dotted #b5b5b5;">Obrigado.</p>
+<p>Equipe JF!</p>
+
+</body>
+</html>

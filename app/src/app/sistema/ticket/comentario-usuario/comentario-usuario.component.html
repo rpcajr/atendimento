@@ -1,0 +1,16 @@
+<div class="ui-g-2 ui-g-nopad center jf__midle">
+  <img [src]="imagem" (error)="setDefaultPic()" style="width: 40px; height: 40px; ">
+  <label class="jf_blk">{{comentario.usuario.nome}}</label>
+</div>
+
+<div class="ui-g-10 ">
+
+  <div class="ui-g-12 speech-bubble" [innerHTML]="html">
+    {{comentario.comentario}}
+  </div>
+  <div class="ui-g-12 ui-g-nopad right">
+    <label class="jf_blk" style="font-size: 9pt; font-style: italic;">{{comentario.datComentario | date:'dd/MM/yy HH:mm:ss' }}</label>
+  </div>
+
+</div>
+

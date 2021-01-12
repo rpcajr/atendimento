@@ -1,0 +1,42 @@
+<p-table #dt [value]="clientes" [responsive]="true" [globalFilterFields]="['fantasia', 'cidade', 'uf', 'codCliente']"
+         [scrollable]="true" scrollHeight="180px"
+         (onRowSelect)="selecionar($event)"
+         selectionMode="single" dataKey="id">
+  <ng-template pTemplate="caption">
+    <div class="ui-g">
+      <div class="ui-g-6" style="text-align: left">
+        <label *ngIf="versao" > Versão: {{versao}}</label>
+      </div>
+      <div class="ui-g-6" style="text-align: right">
+        {{filter.focus()}}
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input type="text" #filter pInputText size="50" placeholder=""
+               (input)="dt.filterGlobal($event.target.value, 'contains')"
+               style="width:auto">
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th class="col_100">Registro</th>
+      <th>Nome</th>
+      <th>Cidade</th>
+      <th class="col_50">UF</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData">
+      <td class="col_100">{{rowData.codCliente}}</td>
+      <td>{{rowData.fantasia}}</td>
+      <td>{{rowData.cidade}}</td>
+      <td class="col_50">{{rowData.uf}}</td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="summary">
+    Total {{clientes.length}}
+  </ng-template>
+
+</p-table>

@@ -1,0 +1,46 @@
+.border{
+  border: 1px solid rgba(94, 169, 128, 0.86);
+  border-radius: 10px;
+  display: flex;
+}
+.nome{
+  font-weight: bold;
+  margin-top: -7px;
+}
+
+.border:hover {
+  background: rgba(12, 108, 104, 0.37);
+  cursor: pointer;
+}
+
+.resolvido{
+  background: #5ea980;
+}
+
+.pendente{
+  background: #85000a;
+}
+
+.andamento{
+  background: #d3bc07;
+}
+
+.resolvido_foto{
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+}
+
+.pendente_foto{
+  background: rgba(190, 12, 12, 0.08);
+  border-radius: 10px;
+}
+
+.andamento_foto{
+  background: rgba(211, 188, 7, 0.07);
+  border-radius: 10px;
+}
+
+
+
+
+

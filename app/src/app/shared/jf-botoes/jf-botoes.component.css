@@ -1,0 +1,15 @@
+.bts{
+  width:42px;
+  height: 34px;
+  margin-right: 10px;
+}
+
+.right-bts {
+  float: right;
+}
+
+@media ( max-width: 585px ) {
+  .bts{
+    margin-right: 1px;
+  }
+}

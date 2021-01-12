@@ -1,0 +1,44 @@
+  <div class="border" (click)="verChamado()">
+  <div class="ui-md-2 ui-g-12" style="text-align: center; max-width: 80px;"  >
+    <div class="ui-g-12 ui-g-nopad">
+      <img [src]="imagem" (error)="setDefaultPic()" style="width: 40px; height: 40px; " >
+    </div>
+    <div class="ui-g-12 ui-g-nopad nome"  >
+      {{chamado.nomeUsuario}}
+    </div>
+  </div>
+  <div class="ui-g-10 " [ngClass]="{'resolvido_foto': chamado.situacao == 0 , 'andamento_foto': chamado.situacao == 1, 'pendente_foto': chamado.situacao == 2}">
+    <div class="ui-g-12 ui-g-nopad">
+      <label>Assunto:</label> {{chamado.titulo}}
+    </div>
+
+    <div class="ui-g-12 ui-md-6 ui-g-nopad">
+      <label>Saae:</label> {{chamado.cliente}}
+    </div>
+
+    <div class="ui-g-12 ui-md-6 ui-g-nopad">
+      <label>Contato:</label> {{chamado.contato}}
+      <i class="fa fa-phone " *ngIf="chamado.atendimento == '0'" title="Telefone"></i>
+      <i style="color: #2a801e" class="fa fa-whatsapp " *ngIf="chamado.atendimento == '1'" title="Whatsapp"></i>
+      <i style="color: #3737b4b3;" class="fa fa-skype " *ngIf="chamado.atendimento == '2'" title="Skype"></i>
+      <i class="fa fa-fa-envelope-o " *ngIf="chamado.atendimento == '3'" title="Email"></i>
+      <i style="color: #3737b4b3;" class="fa fa-fa-facebook-official " *ngIf="chamado.atendimento == '4'"
+         title="Facebook"></i>
+    </div>
+
+    <div class="ui-g-12 ui-md-6 ui-g-nopad">
+      <label>Tipo:</label> {{chamado.ocorrencia}}
+    </div>
+
+    <div class="ui-g-6 ui-g-nopad">
+      <label>Data</label> {{chamado.dataAbertura |date:'dd/MM/yyyy HH:mm'}}
+    </div>
+
+
+  </div>
+  </div>
+
+
+
+
+

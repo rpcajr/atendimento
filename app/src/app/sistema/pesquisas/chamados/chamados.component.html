@@ -1,0 +1,63 @@
+<p-dataView [value]="data?.content" [paginator]="true" [rows]="filter.size" #table
+            [loading]="loading"
+            emptyMessage="Nenhum Registro Encontrado" layout="list"
+            [lazy]="true" (onLazyLoad)="aoMudarPagina($event)" [totalRecords]="data?.totalElements">
+  <p-header>
+    <div class="ui-g ui-g-nopad">
+      <div class="ui-g-6 ui-g-nopad">
+        <label>Total:</label> {{data?.totalElements}}
+
+      </div>
+      <div class="ui-g-6 ui-g-nopad" style="text-align: right">
+        <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+
+        <button type="button" icon="fa fa-print"
+                pButton title="Imprimir"
+                label="Imprimir"
+                (click)="imprimir()"
+                class="bts"></button>
+
+        <button type="button" icon="fa fa-filter"
+                label="Filtrar"
+                *ngIf="!hideFilter"
+                pButton title="Alterar Filtro"
+                (click)="chamarFiltro()"
+                class="bts"></button>
+      </div>
+
+      <div class="ui-g-12 ui-g-nopad" *ngIf="table.layout !== 'grid'" style="border: 1px solid rgb(190, 190, 190);">
+        <div class="ui-g-2 ">
+          <label>Cliente</label>
+        </div>
+        <div class="ui-g-6">
+          <label>Assunto</label>
+        </div>
+        <div class="ui-g-2">
+          <label>Atribuido a</label>
+        </div>
+        <div class="ui-g-2">
+          <label>Data</label>
+        </div>
+      </div>
+
+    </div>
+
+  </p-header>
+
+  <ng-template let-c pTemplate="gridItem">
+    <div class="ui-g-12 ui-md-6 " style="padding: 2px;">
+      <app-chamado-grid-view [chamado]="c" (update)="loadChamado()"></app-chamado-grid-view>
+    </div>
+  </ng-template>
+
+  <ng-template let-c pTemplate="listItem">
+    <div class="ui-g-12 ui-g-nopad">
+      <app-chamado-list-view [chamado]="c" (update)="loadChamado()" ></app-chamado-list-view>
+    </div>
+  </ng-template>
+
+</p-dataView>
+
+
+
+

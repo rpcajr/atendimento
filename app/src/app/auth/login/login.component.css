@@ -1,0 +1,68 @@
+
+
+
+.ui-inputgroup-addon {
+  color: gray;
+}
+
+.jf__addon-color {
+  color: #3192e1;
+}
+
+.ui-message {
+  margin: 4px 0 0;
+
+}
+
+.jf__addon-error {
+  color: #e10a19 !important;
+}
+
+.jf__login-body .jf__login-panel {
+  background-color: #f7f7f7;
+  width: 460px;
+  position: fixed; /* or absolute */
+  top: 10%;
+  left: 35%;
+  text-align: center;
+  padding: 60px 100px;
+  box-sizing: border-box;
+}
+
+.jf__login-body .jf__login-panel h1 {
+  font-size: 22px;
+  color: #2d353c;
+}
+
+.jf__login-body .jf__login-panel h2 {
+  font-size: 13px;
+  color: #b3b3b3;
+}
+
+.jf__login-body .jf__login-panel img {
+  width: 130px;
+}
+
+.jf__login-body .jf__login-panel button {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.jf__login-body .jf__login-panel label {
+  color: #767b7f;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+
+@media (max-width: 640px) {
+  .jf__login-body {
+    padding-top: 40px;
+  }
+
+  .jf__login-body .jf__login-panel {
+    width: 280px;
+    padding: 30px 50px;
+    position: absolute;
+    left: 13%;
+  }
+}

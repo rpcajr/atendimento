@@ -1,0 +1,42 @@
+<div class="topbar clearfix">
+  <div class="logo">
+    <a href="#" [routerLink]="['sistema/geral']">
+      <img src="assets/images/logo.png">
+    </a>
+  </div>
+
+  <h1 class="app-name" style="color: white">JF Software </h1>
+
+  <a id="topbar-menu-button" href="#" (click)="app.onTopbarMenuButtonClick($event)">
+    <i class="fa fa-bars"></i>
+  </a>
+
+  <ul class="topbar-menu fadeInDown" [ngClass]="{'topbar-menu-visible': app.topbarMenuActive}">
+    <li #profile class="profile-item" [ngClass]="{'active-topmenuitem':app.activeTopbarItem === profile}">
+      <a href="#" (click)="app.onTopbarItemClick($event,profile)">
+        <div class="profile-image">
+          <img [src]="imagem" (error)="setDefaultPic()" class="jf__imagem" style="width: 55px; height: 55px;">
+        </div>
+        <div class="profile-info" style="max-width: 100%">
+          <span class="topbar-item-name profile-name" style="font-size: 14pt; font-weight: bold; margin-top: -10px">{{user?.nome}}</span>
+          <span class="topbar-item-name profile-role" style="text-align: center; ">{{user?.setor}}</span>
+        </div>
+      </a>
+
+      <ul class="fadeInDown">
+        <li role="menuitem">
+          <a href="#" (click)="app.onTopbarSubItemClick($event)" routerLink="perfil">
+            <i class="fa fa-fw fa-user"></i>
+            <span>Perfil</span>
+          </a>
+        </li>
+        <li role="menuitem">
+          <a href="#" (click)="sair()">
+            <i class="fa fa-fw fa-sign-out"></i>
+            <span>Sair</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>

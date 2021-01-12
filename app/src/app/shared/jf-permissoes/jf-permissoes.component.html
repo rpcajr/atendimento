@@ -1,0 +1,9 @@
+<p-panel header="Permissões">
+  <p-scrollPanel [style]="{width: '100%', height: '200px'}">
+    <p-tree [value]="tree" [(selection)]="selecionados"
+            selectionMode="checkbox"
+            (onNodeSelect)="nodeSelect($event)" (onNodeUnselect)="nodeSelect($event)" ></p-tree>
+  </p-scrollPanel>
+</p-panel>
+
+
